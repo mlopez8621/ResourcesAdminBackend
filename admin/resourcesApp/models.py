@@ -29,8 +29,6 @@ class Recurso(models.Model):
     idSolicitud = models.CharField(max_length=50, null=False)
     idProyecto = models.CharField(max_length=50, null=False)
     descripcionSolicitud = models.CharField(max_length=300, null=False)
-    fechaEntrega = models.DateField(default=datetime.now, blank=True)
-    presupuesto = models.DecimalField(default=datetime.now, blank=True)
     estado = ForeignKey(Estado)
 
 class Recurso_Responsable(models.Model):
