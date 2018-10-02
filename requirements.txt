@@ -1,6 +1,11 @@
 Django==1.11.15
 django-bootstrap4==0.0.7
 django-toolbelt==0.0.1
+django-filter==1.1.0
+django-jquery==3.1.0
+djangorestframework==3.7.7
 virtualenv==16.0.0
 virtualenv-clone==0.3.0
-
+gunicorn==19.7.1
+Pillow==5.0.0
+pipenv==9.0.3git
