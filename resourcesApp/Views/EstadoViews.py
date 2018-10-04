@@ -6,5 +6,5 @@ from resourcesApp.serializer import EstadoSerializer
 
 
 class EstadosViewSet(viewsets.ModelViewSet):
-    queryset = Estado.objects.all().order_by('id')
+    queryset = Estado.objects.all()
     serializer_class = EstadoSerializer
