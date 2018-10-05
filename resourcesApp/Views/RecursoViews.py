@@ -5,9 +5,12 @@ from resourcesApp.models import Recurso
 from resourcesApp.serializer import RecursoSerializer
 
 
-class RecursoViewSet(viewsets.ModelViewSet):
-
-    queryset = Recurso.objects.all()
+class RecursoViewSet(generics.ListAPIView):
     serializer_class = RecursoSerializer
-    filter_backends = (filters.SearchFilter,)
-    filter_fields = ('=estado','nombres')
+
+    def get_queryset(self):
+        queryset = Recurso.objects.all()
+        estado = self.request.query_params.get('estado',None)
+        if estado:
+            queryset = queryset.filter(estado_id=estado)
+        return queryset;

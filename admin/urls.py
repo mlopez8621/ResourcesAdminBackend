@@ -22,11 +22,9 @@ from resourcesApp.Views.RecursoViews import RecursoViewSet
 
 router = routers.DefaultRouter()
 router.register(r'estados', EstadosViewSet)
-router.register(r'recursos', RecursoViewSet)
-
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url('^recursos-filtrados/?', RecursoViewSet.as_view()),
     url(r'^', include(router.urls))
 
 ]
