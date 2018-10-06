@@ -8,7 +8,7 @@ from resourcesApp.models import Estado, Recurso
 class EstadoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Estado
-        fields = ('nombre','descripcion')
+        fields = ('id','nombre','descripcion')
 
 class RecursoSerializer(serializers.ModelSerializer):
 
