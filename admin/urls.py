@@ -19,12 +19,15 @@ from rest_framework import routers
 
 from resourcesApp.Views.EstadoViews import EstadosViewSet
 from resourcesApp.Views.RecursoViews import RecursoViewSet
+from resourcesApp.Views.ResponsableViews import ResponsableViewSet
+from resourcesApp.Views.RecursoResponsableViews import RecursoResponsableViewSet
 
 router = routers.DefaultRouter()
 router.register(r'estados', EstadosViewSet)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('^recursos-filtrados/?', RecursoViewSet.as_view()),
+    url('^responsable/', ResponsableViewSet.as_view()),
+    url('^recurso-responsable/', RecursoResponsableViewSet.as_view()),
     url(r'^', include(router.urls))
-
 ]

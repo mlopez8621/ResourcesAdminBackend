@@ -8,19 +8,31 @@ from django.db import models
 class Tipo_Recurso(models.Model):
     nombre = models.CharField(max_length=50, null=False)
 
+    def __str__(self):
+        return self.nombre
+
 class Estado(models.Model):
     nombre = models.CharField(max_length=50, null=False)
     descripcion = models.CharField(max_length=50, null=False)
 
+    def __str__(self):
+        return self.nombre
+
 class Rol(models.Model):
     nombre = models.CharField(max_length=50, null=False)
     descripcion = models.CharField(max_length=50, null=False)
+
+    def __str__(self):
+        return self.nombre
 
 class Responsable(models.Model):
     nombres = models.CharField(max_length=50, null=False)
     apellidos = models.CharField(max_length=50, null=False)
     usuario = models.CharField(max_length=50, null=False)
     rol = ForeignKey(Rol)
+
+    def __str__(self):
+        return self.nombres
 
 class Recurso(models.Model):
     nombre = models.CharField(max_length=100, null=False)
@@ -30,6 +42,9 @@ class Recurso(models.Model):
     idProyecto = models.CharField(max_length=50, null=False)
     descripcionSolicitud = models.CharField(max_length=300, null=False)
     estado = ForeignKey(Estado)
+
+    def __str__(self):
+        return self.nombre
 
 class Recurso_Responsable(models.Model):
     responsable = ForeignKey(Responsable)
@@ -43,12 +58,20 @@ class Recurso_Intermedio(models.Model):
     recursoPrincipal = ForeignKey(Recurso)
     responsable = ForeignKey(Responsable)
 
+    def __str__(self):
+        return self.nombre
+
 class Lista_Chequeo(models.Model):
     nombre = models.CharField(max_length=100, null=False)
     descripcion = models.CharField(max_length=200, null=False)
     asignado = ForeignKey(Responsable)
 
+    def __str__(self):
+        return self.nombre
+
+
 class Resultado_ListaChequeo(models.Model):
     recurso = ForeignKey(Recurso_Intermedio)
     itemChequeo = ForeignKey(Lista_Chequeo)
     resultado = models.BooleanField()
+

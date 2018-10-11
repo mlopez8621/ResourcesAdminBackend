@@ -13,4 +13,4 @@ class RecursoViewSet(generics.ListAPIView):
         estado = self.request.query_params.get('estado',None)
         if estado:
             queryset = queryset.filter(estado_id=estado)
-        return queryset;
+        return queryset
