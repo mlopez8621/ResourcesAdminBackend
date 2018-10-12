@@ -17,9 +17,6 @@ class TipoRecursoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class RecursoSerializer(serializers.ModelSerializer):
-    #estado = serializers.StringRelatedField(many=True, read_only=True)
-    tipoRecurso = TipoRecursoSerializer(many=True, read_only=True)
-
     class Meta:
         model = Recurso
         fields = ('nombre','descripcion','tipoRecurso','idSolicitud','idProyecto','descripcionSolicitud','estado')
