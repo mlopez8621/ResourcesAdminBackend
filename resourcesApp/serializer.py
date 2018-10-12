@@ -2,7 +2,8 @@ import serializers as serializers
 
 from rest_framework import routers, serializers, viewsets
 
-from resourcesApp.models import Estado, Recurso, Responsable, Recurso_Responsable
+from resourcesApp.models import Estado, Recurso, Responsable, Recurso_Responsable, Tipo_Recurso
+
 
 
 class EstadoSerializer(serializers.HyperlinkedModelSerializer):
@@ -10,7 +11,14 @@ class EstadoSerializer(serializers.HyperlinkedModelSerializer):
         model = Estado
         fields = ('id','nombre','descripcion')
 
+class TipoRecursoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tipo_Recurso
+        fields = '__all__'
+
 class RecursoSerializer(serializers.ModelSerializer):
+    #estado = serializers.StringRelatedField(many=True, read_only=True)
+    tipoRecurso = TipoRecursoSerializer(many=True, read_only=True)
 
     class Meta:
         model = Recurso
@@ -23,10 +31,9 @@ class ResponsableSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class RecursoResponsableSerializer(serializers.ModelSerializer):
-   #responsable = serializers.StringRelatedField(many=True)
-    #recursoObj = serializers.StringRelatedField(many=True)
+    responsable = serializers.StringRelatedField(read_only='True')
+    rescursos = serializers.StringRelatedField(read_only='True')
 
     class Meta:
         model = Recurso_Responsable
         fields = '__all__'
-

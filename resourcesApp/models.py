@@ -37,17 +37,17 @@ class Responsable(models.Model):
 class Recurso(models.Model):
     nombre = models.CharField(max_length=100, null=False)
     descripcion = models.CharField(max_length=100, null=False)
-    tipoRecurso = ForeignKey(Tipo_Recurso)
+    tipoRecurso = ForeignKey(Tipo_Recurso,related_name='tipoRecurso', on_delete=models.CASCADE)
     idSolicitud = models.CharField(max_length=50, null=False)
     idProyecto = models.CharField(max_length=50, null=False)
     descripcionSolicitud = models.CharField(max_length=300, null=False)
-    estado = ForeignKey(Estado)
+    estado = ForeignKey(Estado,related_name='estado', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre
 
 class Recurso_Responsable(models.Model):
-    responsable = ForeignKey(Responsable)
+    responsable = ForeignKey(Responsable, related_name='responsables')
     rescursos = ForeignKey(Recurso)
 
 class Recurso_Intermedio(models.Model):
