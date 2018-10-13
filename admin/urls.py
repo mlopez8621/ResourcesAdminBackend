@@ -18,13 +18,15 @@ from django.contrib import admin
 from rest_framework import routers
 
 from resourcesApp.Views.EstadoViews import EstadosViewSet
-from resourcesApp.Views.RecursoViews import RecursoViewSet
+from resourcesApp.Views.RecursoViews import RecursoViewSet, TipoRecursoViewSet
 
 router = routers.DefaultRouter()
 router.register(r'estados', EstadosViewSet)
+router.register(r'tipo-recursos', TipoRecursoViewSet)
+urlpatterns = router.urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('^recursos-filtrados/?', RecursoViewSet.as_view()),
-    url(r'^', include(router.urls))
-
+    url(r'^', include(router.urls)),
+    url(r'^', include('resourcesApp.urls'))
 ]
