@@ -1,9 +1,31 @@
+from django.http.response import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework import generics, filters, viewsets, serializers, status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.parsers import JSONParser
+from rest_framework.permissions import AllowAny
+from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
 
-from rest_framework import generics, filters, viewsets
+from resourcesApp.models import Recurso, Tipo_Recurso
+from resourcesApp.serializer import RecursoSerializer, TipoRecursoSerializer
 
-from resourcesApp.models import Recurso
-from resourcesApp.serializer import RecursoSerializer
 
+@csrf_exempt
+def recursos_list(request):
+    if request.method == 'GET':
+        recurso = Recurso.objects.all()
+        serializer = RecursoSerializer(recurso, many=True)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serialized = RecursoSerializer(data=data)
+        if serialized.is_valid():
+            serialized.save()
+            return JSONResponse(serialized.data, status=status.HTTP_201_CREATED)
+        else:
+            return JSONResponse(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
 
 class RecursoViewSet(generics.ListAPIView):
     serializer_class = RecursoSerializer
@@ -13,4 +35,30 @@ class RecursoViewSet(generics.ListAPIView):
         estado = self.request.query_params.get('estado',None)
         if estado:
             queryset = queryset.filter(estado_id=estado)
+
         return queryset
+
+
+class TipoRecursoViewSet(viewsets.ModelViewSet):
+    queryset = Tipo_Recurso.objects.all()
+    serializer_class = TipoRecursoSerializer
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def create_resources(request):
+    serialized = RecursoSerializer(data=request.data)
+    if serialized.is_valid():
+        serialized.save()
+        return Response(serialized.data, status=status.HTTP_201_CREATED)
+    else:
+        return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
+
+class JSONResponse(HttpResponse):
+    """
+    An HttpResponse that renders its content into JSON.
+    """
+    def __init__(self, data, **kwargs):
+        content = JSONRenderer().render(data)
+        kwargs['content_type'] = 'application/json'
+        super(JSONResponse, self).__init__(content, **kwargs)
+
