@@ -21,13 +21,18 @@ from resourcesApp.Views.EstadoViews import EstadosViewSet
 from resourcesApp.Views.RecursoViews import RecursoViewSet
 from resourcesApp.Views.ResponsableViews import ResponsableViewSet
 from resourcesApp.Views.RecursoResponsableViews import RecursoResponsableViewSet
+from resourcesApp.Views.RecursoViews import RecursoViewSet, TipoRecursoViewSet
+
 
 router = routers.DefaultRouter()
 router.register(r'estados', EstadosViewSet)
+router.register(r'tipo-recursos', TipoRecursoViewSet)
+urlpatterns = router.urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('^recursos-filtrados/?', RecursoViewSet.as_view()),
     url('^responsable/', ResponsableViewSet.as_view()),
     url('^recurso-responsable/', RecursoResponsableViewSet.as_view()),
-    url(r'^', include(router.urls))
+    url(r'^', include(router.urls)),
+    url(r'^', include('resourcesApp.urls'))
 ]
