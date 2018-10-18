@@ -28,17 +28,24 @@ class ResponsableSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class RecursoResponsableSerializer(serializers.ModelSerializer):
-    responsable = serializers.StringRelatedField(read_only='True')
-    rescursos = serializers.StringRelatedField(read_only='True')
+    # responsable = serializers.StringRelatedField(read_only='True')
+    # rescursos = serializers.StringRelatedField(read_only='True')
 
     class Meta:
         model = Recurso_Responsable
         fields = '__all__'
 
     def create(self, validated_data):
-        recurso = super(RecursoSerializer,self).create(validated_data)
-        recurso.save()
-        return recurso
+        recursoResponsable = super(RecursoResponsableSerializer,self).create(validated_data)
+        recursoResponsable.save()
+        return recursoResponsable
+
+    def update(self, instance, validated_data):
+        instance.id = validated_data.get('id',instance.id)
+        instance.rescursos = validated_data.get('recursos', instance.rescursos)
+        instance.responsable = validated_data.get('responsable', instance.responsable)
+        instance.save()
+        return instance
 
 class TipoRecursoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -51,3 +58,7 @@ class RecursoCreate(serializers.ModelSerializer):
         model = Recurso
         fields =('nombre','descripcion','tipoRecurso','idSolicitud','idProyecto','descripcionSolicitud','estado')
 
+    def create(self, validated_data):
+        recurso = super(RecursoSerializer,self).create(validated_data)
+        recurso.save()
+        return recurso

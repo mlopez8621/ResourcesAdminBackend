@@ -1,7 +1,8 @@
 from django.conf.urls import url
 
-from resourcesApp.Views import RecursoViews
+from resourcesApp.Views import RecursoViews, RecursoResponsableViews
 
 urlpatterns = [
-    url(r'^recurso$', RecursoViews.recursos_list)
+    url(r'^recurso$', RecursoViews.recursos_list),
+    url(r'^recurso_res/(\d+)/$', RecursoResponsableViews.recursoResponsable_list)
 ]
