@@ -26,7 +26,7 @@ router.register(r'tipo-recursos', TipoRecursoViewSet)
 urlpatterns = router.urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url('^recursos-filtrados/?', RecursoViewSet.as_view()),
+    url('^recursos/?', RecursoViewSet.as_view()),
     url(r'^', include(router.urls)),
     url(r'^', include('resourcesApp.urls'))
 ]

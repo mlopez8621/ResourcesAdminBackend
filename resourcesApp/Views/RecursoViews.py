@@ -27,12 +27,16 @@ def recursos_list(request):
         else:
             return JSONResponse(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class RecursoViewSet(generics.ListAPIView):
     serializer_class = RecursoSerializer
 
     def get_queryset(self):
         queryset = Recurso.objects.all()
         estado = self.request.query_params.get('estado',None)
+        id = self.request.query_params.get('id',None)
+        if id:
+            queryset = queryset.filter(id=id)
         if estado:
             queryset = queryset.filter(estado_id=estado)
         return queryset;
