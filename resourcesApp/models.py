@@ -46,6 +46,13 @@ class Recurso(models.Model):
     def __str__(self):
         return self.nombre
 
+class Recurso_Comentario(models.Model):
+    idRecurso = ForeignKey(Recurso,related_name='recurso',on_delete=models.CASCADE)
+    comentario = models.CharField(max_length=1000,null=False)
+
+    def __str__(self):
+        return self.nombre
+
 class Recurso_Responsable(models.Model):
     responsable = ForeignKey(Responsable, related_name='responsables')
     rescursos = ForeignKey(Recurso)
