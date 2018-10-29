@@ -49,7 +49,7 @@ class Recurso(models.Model):
 class Recurso_Comentario(models.Model):
     idRecurso = ForeignKey(Recurso,related_name='recurso',on_delete=models.CASCADE)
     comentario = models.CharField(max_length=1000,null=False)
-
+    revisor = ForeignKey(Responsable,related_name='responsable',on_delete=models.CASCADE)
     def __str__(self):
         return self.nombre
 
