@@ -39,7 +39,8 @@ class RecursoViewSet(generics.ListAPIView):
             queryset = queryset.filter(id=id)
         if estado:
             queryset = queryset.filter(estado_id=estado)
-        return queryset;
+
+        return queryset
 
 
 class TipoRecursoViewSet(viewsets.ModelViewSet):
@@ -64,3 +65,4 @@ class JSONResponse(HttpResponse):
         content = JSONRenderer().render(data)
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
+

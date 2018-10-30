@@ -85,6 +85,18 @@ DATABASES = {
     }
 
 }
+# DATABASES = {
+#
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'recursos',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+#
+# }
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
