@@ -7,8 +7,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-from resourcesApp.models import Recurso, Tipo_Recurso
-from resourcesApp.serializer import RecursoSerializer, TipoRecursoSerializer
+from resourcesApp.models import Recurso, Tipo_Recurso, Recurso_Comentario
+from resourcesApp.serializer import RecursoSerializer, TipoRecursoSerializer, RecursoComentarioSerializer
 
 
 @csrf_exempt
@@ -62,4 +62,10 @@ class JSONResponse(HttpResponse):
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
 
-class Recurso_Comentario:
+
+@csrf_exempt
+def recursos_comentarios(request):
+    if request.method == 'GET':
+        recurso = Recurso_Comentario.objects.all()
+        serializer = RecursoComentarioSerializer(recurso, many=True)
+        return JSONResponse(serializer.data)
