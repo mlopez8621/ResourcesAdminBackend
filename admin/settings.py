@@ -8,16 +8,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import sys
-import dj_database_url
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(BASE_DIR)
-os.environ['DJANGO_SETTINGS_MODULE'] = 'admin.settings'
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "admin.settings")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -28,7 +22,6 @@ SECRET_KEY = '9#4v-%nqicyvi@#qpn(l)@p746if1xg6+sy8x^+7n*qnv1j(ox'
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-DJANGO_SETTINGS_MODULE = 'admin.settings'
 # Application definition
 
 INSTALLED_APPS = [

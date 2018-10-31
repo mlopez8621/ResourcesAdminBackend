@@ -3,6 +3,5 @@ from django.conf.urls import url
 from resourcesApp.Views import RecursoViews
 
 urlpatterns = [
-    url(r'^recurso$', RecursoViews.recursos_list),
-    url(r'^comentarios$', RecursoViews.recursos_comentarios)
+    url(r'^recurso$', RecursoViews.recursos_list)
 ]

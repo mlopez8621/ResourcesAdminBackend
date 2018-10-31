@@ -7,7 +7,6 @@ class TestComentario(TestCase):
 
     def test_recurso_sin_comentarios(self):
         tester = Recurso.object.get(nombre="prueba_uno");
-        print("*** "+tester);
         self.assertEqual(len(tester.comentarios), 0)
 
 
