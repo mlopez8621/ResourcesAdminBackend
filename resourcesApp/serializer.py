@@ -3,7 +3,8 @@ import serializers as serializers
 from rest_framework import routers, serializers, viewsets
 
 
-from resourcesApp.models import Estado, Recurso, Responsable, Recurso_Responsable, Tipo_Recurso
+from resourcesApp.models import Estado, Recurso, Responsable, Recurso_Responsable, Recurso_Comentario, \
+    TipoRecurso
 
 
 class EstadoSerializer(serializers.HyperlinkedModelSerializer):
@@ -11,18 +12,16 @@ class EstadoSerializer(serializers.HyperlinkedModelSerializer):
         model = Estado
         fields = ('id','nombre','descripcion')
 
-class TipoRecursoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tipo_Recurso
-        fields = '__all__'
-
 class RecursoSerializer(serializers.ModelSerializer):
-    #estado = serializers.StringRelatedField(many=True, read_only=True)
-    tipoRecurso = TipoRecursoSerializer(many=True, read_only=True)
 
     class Meta:
         model = Recurso
         fields = ('nombre','descripcion','tipoRecurso','idSolicitud','idProyecto','descripcionSolicitud','estado')
+
+    def create(self, validated_data):
+        recurso = super(RecursoSerializer,self).create(validated_data)
+        recurso.save()
+        return recurso
 
 class ResponsableSerializer(serializers.ModelSerializer):
 
@@ -46,7 +45,7 @@ class RecursoResponsableSerializer(serializers.ModelSerializer):
 class TipoRecursoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         ordering = ['id']
-        model = Tipo_Recurso
+        model = TipoRecurso
         fields = ('id','nombre')
 
 class RecursoCreate(serializers.ModelSerializer):
@@ -54,3 +53,7 @@ class RecursoCreate(serializers.ModelSerializer):
         model = Recurso
         fields =('nombre','descripcion','tipoRecurso','idSolicitud','idProyecto','descripcionSolicitud','estado')
 
+class RecursoComentarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recurso_Comentario
+        fields = '__all__'
