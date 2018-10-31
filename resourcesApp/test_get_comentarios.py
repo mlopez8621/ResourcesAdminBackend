@@ -1,7 +1,6 @@
 from unittest import TestCase
 
 from resourcesApp.Views.RecursoViews import recursos_comentarios
-from resourcesApp.models import Recurso
 
 
 class TestComentario(TestCase):

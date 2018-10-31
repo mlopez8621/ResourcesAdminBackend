@@ -3,7 +3,7 @@ import serializers as serializers
 from rest_framework import routers, serializers, viewsets
 
 
-from resourcesApp.models import Estado, Recurso, Responsable, Recurso_Responsable, TipoRecurso, Recurso_Comentario, \
+from resourcesApp.models import Estado, Recurso, Responsable, Recurso_Responsable, Recurso_Comentario, \
     TipoRecurso
 
 
