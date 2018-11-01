@@ -30,7 +30,7 @@ router.register(r'tipo-recursos', TipoRecursoViewSet)
 urlpatterns = router.urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url('^recursos-filtrados/?', RecursoViewSet.as_view()),
+    url('^recursos/?', RecursoViewSet.as_view()),
     url('^comentarios/?', recursos_comentarios.as_view()),
     url('^responsable/', ResponsableViewSet.as_view()),
     url('^recurso-responsable/', RecursoResponsableViewSet.as_view()),
