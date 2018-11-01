@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-from resourcesApp.models import Recurso, Tipo_Recurso, Recurso_Comentario
+from resourcesApp.models import Recurso, Tipo_Recurso, Control_Comentarios
 from resourcesApp.serializer import RecursoSerializer, TipoRecursoSerializer, RecursoComentarioSerializer
 
 
@@ -69,7 +69,7 @@ class JSONResponse(HttpResponse):
 class recursos_comentarios(generics.ListAPIView):
     serializer_class = RecursoComentarioSerializer
     def get_queryset(self):
-        queryset = Recurso_Comentario.objects.all()
+        queryset = Control_Comentarios.objects.all()
         idRecurso = self.request.query_params.get('idRecurso',None)
         if idRecurso:
             queryset = queryset.filter(idRecurso=idRecurso)
