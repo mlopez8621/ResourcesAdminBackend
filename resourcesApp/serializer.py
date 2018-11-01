@@ -4,7 +4,7 @@ from rest_framework import routers, serializers, viewsets
 
 
 from resourcesApp.models import Estado, Recurso, Responsable, Recurso_Responsable, Recurso_Comentario, \
-    TipoRecurso
+    Tipo_Recurso
 
 
 class EstadoSerializer(serializers.HyperlinkedModelSerializer):
@@ -46,7 +46,7 @@ class RecursoResponsableSerializer(serializers.ModelSerializer):
 class TipoRecursoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         ordering = ['id']
-        model = TipoRecurso
+        model = Tipo_Recurso
         fields = ('id','nombre')
 
 class RecursoCreate(serializers.ModelSerializer):

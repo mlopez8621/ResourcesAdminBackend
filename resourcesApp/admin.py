@@ -5,9 +5,9 @@ from django.contrib import admin
 
 # Register your models here.
 from resourcesApp.models import Estado, Rol, Responsable, Recurso, Recurso_Responsable, \
-    Recurso_Intermedio, Lista_Chequeo, Resultado_ListaChequeo, Recurso_Comentario,TipoRecurso
+    Recurso_Intermedio, Lista_Chequeo, Resultado_ListaChequeo, Recurso_Comentario,Tipo_Recurso
 
-admin.site.register(TipoRecurso);
+admin.site.register(Tipo_Recurso);
 admin.site.register(Estado);
 admin.site.register(Rol);
 admin.site.register(Responsable);

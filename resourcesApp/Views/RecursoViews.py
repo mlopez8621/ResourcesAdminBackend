@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-from resourcesApp.models import Recurso, TipoRecurso, Recurso_Comentario
+from resourcesApp.models import Recurso, Tipo_Recurso, Recurso_Comentario
 from resourcesApp.serializer import RecursoSerializer, TipoRecursoSerializer, RecursoComentarioSerializer
 
 
@@ -44,7 +44,7 @@ class RecursoViewSet(generics.ListAPIView):
 
 
 class TipoRecursoViewSet(viewsets.ModelViewSet):
-    queryset = TipoRecurso.objects.all()
+    queryset = Tipo_Recurso.objects.all()
     serializer_class = TipoRecursoSerializer
 
 @api_view(['POST'])
