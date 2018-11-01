@@ -28,8 +28,8 @@ class ResponsableSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class RecursoResponsableSerializer(serializers.ModelSerializer):
-    # responsable = serializers.StringRelatedField(read_only='True')
-    # rescursos = serializers.StringRelatedField(read_only='True')
+    responsable = serializers.StringRelatedField(read_only='True')
+    rescursos = serializers.StringRelatedField(read_only='True')
 
     class Meta:
         model = Recurso_Responsable

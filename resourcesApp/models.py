@@ -32,7 +32,7 @@ class Responsable(models.Model):
     rol = ForeignKey(Rol)
 
     def __str__(self):
-        return self.nombres
+        return '%d: %s' % (self.id, self.nombres)
 
 class Recurso(models.Model):
     nombre = models.CharField(max_length=100, null=False)
@@ -44,7 +44,7 @@ class Recurso(models.Model):
     estado = ForeignKey(Estado,related_name='estado', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.nombre
+        return '%d: %s' % (self.id, self.nombre)
 
 class Recurso_Responsable(models.Model):
     responsable = ForeignKey(Responsable, related_name='responsables')
