@@ -1,5 +1,7 @@
+from datetime import datetime
+
 from django.db.models import ForeignKey
-from django.db.models.functions import datetime
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -51,6 +53,7 @@ class Control_Comentarios(models.Model):
     comentario = models.CharField(max_length=1000, null=False)
     revisor = ForeignKey(Responsable, related_name='responsable', on_delete=models.CASCADE)
     descripcion =  models.CharField(max_length=1000, null=True)
+    fecha = models.DateField(default=datetime.now, blank=True)
 
 class Recurso_Responsable(models.Model):
     responsable = ForeignKey(Responsable, related_name='responsables')

@@ -55,6 +55,9 @@ class RecursoCreate(serializers.ModelSerializer):
         fields =('nombre','descripcion','tipo_Recurso','idSolicitud','idProyecto','descripcionSolicitud','estado')
 
 class RecursoComentarioSerializer(serializers.ModelSerializer):
+    nombre_responsable = serializers.CharField(source='revisor.nombres', read_only=True)
+    apellidos_responsable = serializers.CharField(source='revisor.apellidos', read_only=True)
+    usuario = serializers.CharField(source='revisor.usuario', read_only=True)
     class Meta:
         model = Control_Comentarios
         fields = '__all__'
