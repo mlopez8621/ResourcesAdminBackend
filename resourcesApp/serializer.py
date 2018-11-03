@@ -32,9 +32,11 @@ class ResponsableSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class RecursoResponsableSerializer(serializers.ModelSerializer):
-    #responsable = serializers.StringRelatedField(read_only='False')
-    #rescursos = serializers.StringRelatedField(read_only='False')
-
+    responsable = serializers.CharField(source='responsable.nombres', read_only=True)
+    idResponsable = serializers.CharField(source='responsable.id', read_only=True)
+    #
+    recursos = serializers.CharField(source='rescursos.nombre', read_only=True)
+    recursoId = serializers.CharField(source='rescursos.id', read_only=True)
     class Meta:
         model = Recurso_Responsable
         fields = '__all__'
