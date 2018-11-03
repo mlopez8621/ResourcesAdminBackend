@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -22,7 +22,6 @@ SECRET_KEY = '9#4v-%nqicyvi@#qpn(l)@p746if1xg6+sy8x^+7n*qnv1j(ox'
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -35,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'resourcesApp',
     'rest_framework',
-    'corsheaders',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -75,28 +74,24 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 
 DATABASES = {
 
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'resources',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'password',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432'
+    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd6fiquuon7pa5i',
-        'USER': 'enhyuuajdoaydb',
-        'PASSWORD': 'd2375d43066248e3313b816ff6dbfa4310a6dd82e67dedd51719b154a74b4724',
-        'HOST': 'ec2-54-235-90-0.compute-1.amazonaws.com',
+        'NAME': 'dbmn358ov5l66j',
+        'USER': 'uidjvxuhavcnxe',
+        'PASSWORD': 'e0259f4d55a91b10d88fe3d8fd386bea97f1a5ebd1647a5f26eb609b37f85a6f',
+        'HOST': 'ec2-54-204-14-96.compute-1.amazonaws.com',
         'PORT': '5432'
     }
 
 }
-# DATABASES = {
-#
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'recursos',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-#
-# }
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -109,7 +104,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 100,
+    'PAGE_SIZE': 10,
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 
 }
