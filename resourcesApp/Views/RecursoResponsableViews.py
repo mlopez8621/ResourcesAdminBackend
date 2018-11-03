@@ -1,3 +1,5 @@
+from typing import re
+
 from django.http.response import HttpResponse
 from rest_framework import generics, filters, viewsets, serializers, status
 from django.views.decorators.csrf import csrf_exempt
@@ -48,7 +50,20 @@ def recursoResponsable_list(request, pk):
         return Response(serializer.data)
 
     elif request.method == 'PUT':
+        print("Entro al put")
+        print("request.data:", request.data)
+
+        #request.data={'id': 1, 'responsable': 2, 'rescursos': 1}
+
+        data = request.data
+
+
+        print("request.data2:", data)
         serializer = RecursoResponsableSerializer(recursoResponsable, data=request.data)
+
+        print("idResponsable:", serializer)
+
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
