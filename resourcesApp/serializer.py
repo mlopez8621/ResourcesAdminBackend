@@ -32,14 +32,14 @@ class ResponsableSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class RecursoResponsableSerializer(serializers.ModelSerializer):
-    responsable = serializers.CharField(source='responsable.nombres', read_only=True)
-    idResponsable = serializers.CharField(source='responsable.id', read_only=True)
+    idResponsable = serializers.CharField(source='responsable.nombres', read_only=True)
+    responsable = serializers.CharField(source='responsable.id', read_only=True)
     #
-    recursos = serializers.CharField(source='rescursos.nombre', read_only=True)
-    recursoId = serializers.CharField(source='rescursos.id', read_only=True)
+    recursosId = serializers.CharField(source='rescursos.nombre', read_only=True)
+    recursos = serializers.CharField(source='rescursos.id', read_only=True)
     class Meta:
         model = Recurso_Responsable
-        fields = '__all__'
+        fields = ('responsable','recursos','idResponsable','recursosId')
 
     def create(self, validated_data):
         recursoResponsable = super(RecursoResponsableSerializer,self).create(validated_data)
@@ -47,9 +47,11 @@ class RecursoResponsableSerializer(serializers.ModelSerializer):
         return recursoResponsable
 
     def update(self, instance, validated_data):
+        print(instance)
         instance.id = validated_data.get('id',instance.id)
         instance.rescursos = validated_data.get('recursos', instance.rescursos)
         instance.responsable = validated_data.get('responsable', instance.responsable)
+        print(instance)
         instance.save()
         return instance
 
