@@ -13,8 +13,8 @@ class EstadoSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id','nombre','descripcion')
 
 class RecursoSerializer(serializers.ModelSerializer):
-    #nombre_estado = serializers.CharField(source='estado.nombre', read_only=True)
-    #nombre_tipo = serializers.CharField(source='tipoRecurso.nombre', read_only=True)
+    nombre_estado = serializers.CharField(source='estado.nombre', read_only=True)
+    nombre_tipo = serializers.CharField(source='tipoRecurso.nombre', read_only=True)
 
     class Meta:
         model = Recurso
