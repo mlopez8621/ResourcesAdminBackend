@@ -82,6 +82,9 @@ class resultado_ListachequeoViewSet(generics.ListAPIView):
     def get_queryset(self):
         queryset = Resultado_ListaChequeo.objects.all()
         idRecurso = self.request.query_params.get('idRecurso',None)
+        estado = 'Gesti'
         if idRecurso:
             queryset = queryset.filter(idRecurso=idRecurso)
+        if estado:
+            queryset = queryset.filter(recurso__estado__nombre__contains=estado)
         return queryset
