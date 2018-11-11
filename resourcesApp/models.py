@@ -56,7 +56,7 @@ class Control_Comentarios(models.Model):
     fecha = models.DateField(default=datetime.now, blank=True)
 
 class Recurso_Responsable(models.Model):
-    responsable = ForeignKey(Responsable, related_name='responsables')
+    responsable = ForeignKey(Responsable)
     rescursos = ForeignKey(Recurso)
 
 class Recurso_Intermedio(models.Model):

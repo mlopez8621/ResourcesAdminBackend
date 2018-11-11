@@ -32,14 +32,23 @@ class ResponsableSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class RecursoResponsableSerializer(serializers.ModelSerializer):
-    idResponsable = serializers.CharField(source='responsable.nombres', read_only=True)
-    responsable = serializers.CharField(source='responsable.id', read_only=True)
-    #
-    recursosId = serializers.CharField(source='rescursos.nombre', read_only=True)
-    recursos = serializers.CharField(source='rescursos.id', read_only=True)
+
     class Meta:
         model = Recurso_Responsable
-        fields = ('responsable','recursos','idResponsable','recursosId')
+        fields = '__all__'
+
+class RecursoResponsableMostarSerializer(serializers.ModelSerializer):
+    responsable = serializers.CharField(source='responsable.id', read_only=True)
+    responsableName = serializers.CharField(source='responsable.nombres', read_only=True)
+    #
+    rescursos = serializers.CharField(source='rescursos.id', read_only=True)
+    rescursosName = serializers.CharField(source='rescursos.nombre', read_only=True)
+
+    class Meta:
+        model = Recurso_Responsable
+        # fields = ('id','responsable','responsableName','rescursos','rescursosName')
+        fields = '__all__'
+
 
     def create(self, validated_data):
         recursoResponsable = super(RecursoResponsableSerializer,self).create(validated_data)
@@ -54,6 +63,9 @@ class RecursoResponsableSerializer(serializers.ModelSerializer):
         print(instance)
         instance.save()
         return instance
+
+
+
 
 class TipoRecursoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

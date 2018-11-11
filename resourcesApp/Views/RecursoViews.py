@@ -14,7 +14,7 @@ from resourcesApp.serializer import RecursoSerializer, TipoRecursoSerializer, Re
 @csrf_exempt
 def recursos_list(request):
     if request.method == 'GET':
-        recurso = Recurso.objects.all()
+        recurso = Recurso.objects.all().order_by('id')
         serializer = RecursoSerializer(recurso, many=True)
         return JSONResponse(serializer.data)
 
