@@ -7,8 +7,9 @@ from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-from resourcesApp.models import Recurso, Tipo_Recurso, Control_Comentarios
-from resourcesApp.serializer import RecursoSerializer, TipoRecursoSerializer, RecursoComentarioSerializer
+from resourcesApp.models import Recurso, Tipo_Recurso, Control_Comentarios, Resultado_ListaChequeo
+from resourcesApp.serializer import RecursoSerializer, TipoRecursoSerializer, RecursoComentarioSerializer, \
+    ResultListCheqSerializer
 
 
 @csrf_exempt
@@ -74,4 +75,13 @@ class recursos_comentarios(generics.ListAPIView):
         if idRecurso:
             queryset = queryset.filter(idRecurso=idRecurso)
 
+        return queryset
+
+class resultado_ListachequeoViewSet(generics.ListAPIView):
+    serializer_class = ResultListCheqSerializer
+    def get_queryset(self):
+        queryset = Resultado_ListaChequeo.objects.all()
+        idRecurso = self.request.query_params.get('idRecurso',None)
+        if idRecurso:
+            queryset = queryset.filter(idRecurso=idRecurso)
         return queryset
