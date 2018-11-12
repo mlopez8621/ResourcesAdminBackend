@@ -4,7 +4,7 @@ from rest_framework import routers, serializers, viewsets
 
 
 from resourcesApp.models import Estado, Responsable, Recurso_Responsable, \
-    Tipo_Recurso, Recurso, Control_Comentarios
+    Tipo_Recurso, Recurso, Control_Comentarios, Resultado_ListaChequeo
 
 
 class EstadoSerializer(serializers.HyperlinkedModelSerializer):
@@ -89,3 +89,12 @@ class RecursoComentarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Control_Comentarios
         fields = '__all__'
+
+class ResultListCheqSerializer(serializers.ModelSerializer):
+    nombre_recurso = serializers.CharField(source='recurso.nombre', read_only=True)
+    nombre_item = serializers.CharField(source='itemChequeo.nombre', read_only=True)
+
+    class Meta:
+        model = Resultado_ListaChequeo
+        fields = (
+        'id', 'nombre_recurso', 'nombre_item', 'resultado')
