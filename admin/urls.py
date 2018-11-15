@@ -18,7 +18,8 @@ from django.contrib import admin
 from rest_framework import routers
 
 from resourcesApp.Views.EstadoViews import EstadosViewSet
-from resourcesApp.Views.RecursoViews import RecursoViewSet, recursos_comentarios, resultado_ListachequeoViewSet
+from resourcesApp.Views.RecursoViews import RecursoViewSet, recursos_comentarios, resultado_ListachequeoViewSet, \
+    Recurso_revisorViewSet
 from resourcesApp.Views.ResponsableViews import ResponsableViewSet
 from resourcesApp.Views.RecursoResponsableViews import RecursoResponsableViewSet
 from resourcesApp.Views.RecursoViews import RecursoViewSet, TipoRecursoViewSet
@@ -27,6 +28,7 @@ from resourcesApp.Views.RecursoViews import RecursoViewSet, TipoRecursoViewSet
 router = routers.DefaultRouter()
 router.register(r'estados', EstadosViewSet)
 router.register(r'tipo-recursos', TipoRecursoViewSet)
+router.register(r'recurso-revisor', Recurso_revisorViewSet)
 urlpatterns = router.urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
