@@ -22,8 +22,7 @@ from resourcesApp.Views.RecursoViews import RecursoViewSet, recursos_comentarios
 from resourcesApp.Views.ResponsableViews import ResponsableViewSet
 from resourcesApp.Views.RecursoResponsableViews import RecursoResponsableViewSet
 from resourcesApp.Views.RecursoViews import RecursoViewSet, TipoRecursoViewSet
-
-
+from resourcesApp.Views.ComentarioViews import crear_comentario
 router = routers.DefaultRouter()
 router.register(r'estados', EstadosViewSet)
 router.register(r'tipo-recursos', TipoRecursoViewSet)
@@ -34,6 +33,7 @@ urlpatterns = [
     url('^comentarios/?', recursos_comentarios.as_view()),
     url('^responsable/', ResponsableViewSet.as_view()),
     url('^recurso-responsable/', RecursoResponsableViewSet.as_view()),
+    url('^comentario/?', crear_comentario),
     url(r'^', include(router.urls)),
     url(r'^', include('resourcesApp.urls'))
 ]

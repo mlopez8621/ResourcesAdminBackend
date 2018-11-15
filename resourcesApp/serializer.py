@@ -12,9 +12,10 @@ class EstadoSerializer(serializers.HyperlinkedModelSerializer):
         model = Estado
         fields = ('id','nombre','descripcion')
 
+
 class RecursoSerializer(serializers.ModelSerializer):
-    #nombre_estado = serializers.CharField(source='estado.nombre', read_only=True)
-    #nombre_tipo = serializers.CharField(source='tipoRecurso.nombre', read_only=True)
+    nombre_estado = serializers.CharField(source='estado.nombre', read_only=True)
+    nombre_tipo = serializers.CharField(source='tipoRecurso.nombre', read_only=True)
 
     class Meta:
         model = Recurso
@@ -25,11 +26,13 @@ class RecursoSerializer(serializers.ModelSerializer):
         recurso.save()
         return recurso
 
+
 class ResponsableSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Responsable
         fields = '__all__'
+
 
 class RecursoResponsableSerializer(serializers.ModelSerializer):
     idResponsable = serializers.CharField(source='responsable.nombres', read_only=True)
@@ -55,6 +58,7 @@ class RecursoResponsableSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+
 class TipoRecursoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         ordering = ['id']
@@ -70,6 +74,8 @@ class RecursoCreate(serializers.ModelSerializer):
         recurso = super(RecursoSerializer,self).create(validated_data)
         recurso.save()
         return recurso
+
+
 class RecursoComentarioSerializer(serializers.ModelSerializer):
     nombre_responsable = serializers.CharField(source='revisor.nombres', read_only=True)
     apellidos_responsable = serializers.CharField(source='revisor.apellidos', read_only=True)

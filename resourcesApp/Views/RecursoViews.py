@@ -75,3 +75,4 @@ class recursos_comentarios(generics.ListAPIView):
             queryset = queryset.filter(idRecurso=idRecurso)
 
         return queryset
+
