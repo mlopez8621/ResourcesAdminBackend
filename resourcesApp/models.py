@@ -44,7 +44,7 @@ class Recurso(models.Model):
     idProyecto = models.CharField(max_length=50, null=False)
     descripcionSolicitud = models.CharField(max_length=300, null=False)
     estado = ForeignKey(Estado,related_name='estado', on_delete=models.CASCADE, default="Creado")
-
+    auditor = ForeignKey(Responsable,related_name='auditor', on_delete=models.CASCADE,null=True)
     def __str__(self):
         return '%d: %s' % (self.id, self.nombre)
 
@@ -57,7 +57,7 @@ class Control_Comentarios(models.Model):
     estado = models.CharField(max_length=20, null=False)
 
 class Recurso_Responsable(models.Model):
-    responsable = ForeignKey(Responsable, related_name='responsables')
+    responsable = ForeignKey(Responsable)
     rescursos = ForeignKey(Recurso)
 
 class Recurso_Intermedio(models.Model):
