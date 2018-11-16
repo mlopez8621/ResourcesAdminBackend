@@ -1,3 +1,7 @@
+from itertools import chain
+from operator import attrgetter
+
+from django.db.models import Q
 from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics, filters, viewsets, serializers, status
@@ -9,11 +13,13 @@ from rest_framework.response import Response
 
 from resourcesApp.models import Recurso, Tipo_Recurso, Control_Comentarios, Resultado_ListaChequeo
 from resourcesApp.serializer import RecursoSerializer, TipoRecursoSerializer, RecursoComentarioSerializer, \
-    ResultListCheqSerializer
+    ResultListCheqSerializer, RecursosAuditorSerializer
 
 
 @csrf_exempt
 def recursos_list(request):
+
+
     if request.method == 'GET':
         recurso = Recurso.objects.all().order_by('id')
         serializer = RecursoSerializer(recurso, many=True)
@@ -27,6 +33,19 @@ def recursos_list(request):
             return JSONResponse(serialized.data, status=status.HTTP_201_CREATED)
         else:
             return JSONResponse(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method=='PUT':
+        try:
+            data = JSONParser().parse(request)
+            recursoExistente = Recurso.objects.get(pk=data.get('id'))
+        except Recurso.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serialized = RecursoSerializer(recursoExistente,data=data)
+        if serialized.is_valid():
+            serialized.save()
+            return JSONResponse(serialized.data, status=status.HTTP_200_OK)
+        else:
+            return JSONResponse(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class RecursoViewSet(generics.ListAPIView):
@@ -87,4 +106,14 @@ class resultado_ListachequeoViewSet(generics.ListAPIView):
             queryset = queryset.filter(idRecurso=idRecurso)
         if estado:
             queryset = queryset.filter(recurso__estado__nombre__contains=estado)
+        return queryset
+
+
+class RecursoAuditorViewSet(generics.ListAPIView):
+    serializer_class = RecursosAuditorSerializer
+    def get_queryset(self):
+        queryset = Recurso.objects.all()
+        estado = self.request.query_params.get('estado',None)
+        if estado:
+            queryset = queryset.filter(estado_id=estado)
         return queryset

@@ -12,24 +12,38 @@ class EstadoSerializer(serializers.HyperlinkedModelSerializer):
         model = Estado
         fields = ('id','nombre','descripcion')
 
+
+
 class RecursoSerializer(serializers.ModelSerializer):
     nombre_estado = serializers.CharField(source='estado.nombre', read_only=True)
     nombre_tipo = serializers.CharField(source='tipoRecurso.nombre', read_only=True)
 
     class Meta:
         model = Recurso
-        fields = ('id', 'nombre','descripcion','tipoRecurso','idSolicitud','idProyecto','descripcionSolicitud','estado', 'nombre_estado', 'nombre_tipo')
+        fields = ('id', 'nombre','descripcion','tipoRecurso','idSolicitud','idProyecto','descripcionSolicitud','estado', 'nombre_estado', 'nombre_tipo','auditor')
 
     def create(self, validated_data):
         recurso = super(RecursoSerializer,self).create(validated_data)
         recurso.save()
         return recurso
 
+    def update(self, instance, validated_data):
+        instance.id = validated_data.get('id', instance.id)
+        instance.auditor = validated_data.get('auditor', instance.auditor)
+        print(instance)
+        instance.save()
+        return instance
+
 class ResponsableSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Responsable
         fields = '__all__'
+
+
+
+
+
 
 class RecursoResponsableSerializer(serializers.ModelSerializer):
 
@@ -98,3 +112,10 @@ class ResultListCheqSerializer(serializers.ModelSerializer):
         model = Resultado_ListaChequeo
         fields = (
         'id', 'nombre_recurso', 'nombre_item', 'resultado')
+
+class RecursosAuditorSerializer(serializers.ModelSerializer):
+    auditor = ResponsableSerializer(read_only=True,allow_null=True)
+    tipoRecurso=TipoRecursoSerializer(read_only=True,allow_null=True)
+    class Meta:
+        model = Recurso
+        fields = '__all__'

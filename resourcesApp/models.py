@@ -44,7 +44,7 @@ class Recurso(models.Model):
     idProyecto = models.CharField(max_length=50, null=False)
     descripcionSolicitud = models.CharField(max_length=300, null=False)
     estado = ForeignKey(Estado,related_name='estado', on_delete=models.CASCADE)
-
+    auditor = ForeignKey(Responsable,related_name='auditor', on_delete=models.CASCADE,null=True)
     def __str__(self):
         return '%d: %s' % (self.id, self.nombre)
 
