@@ -12,8 +12,7 @@ class EstadoSerializer(serializers.HyperlinkedModelSerializer):
         model = Estado
         fields = ('id','nombre','descripcion')
 
-
-
+        
 class RecursoSerializer(serializers.ModelSerializer):
     nombre_estado = serializers.CharField(source='estado.nombre', read_only=True)
     nombre_tipo = serializers.CharField(source='tipoRecurso.nombre', read_only=True)
@@ -33,17 +32,11 @@ class RecursoSerializer(serializers.ModelSerializer):
         print(instance)
         instance.save()
         return instance
-
 class ResponsableSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Responsable
         fields = '__all__'
-
-
-
-
-
 
 class RecursoResponsableSerializer(serializers.ModelSerializer):
 
@@ -78,9 +71,7 @@ class RecursoResponsableMostarSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-
-
-
+      
 class TipoRecursoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         ordering = ['id']
@@ -96,6 +87,8 @@ class RecursoCreate(serializers.ModelSerializer):
         recurso = super(RecursoSerializer,self).create(validated_data)
         recurso.save()
         return recurso
+
+      
 class RecursoComentarioSerializer(serializers.ModelSerializer):
     nombre_responsable = serializers.CharField(source='revisor.nombres', read_only=True)
     apellidos_responsable = serializers.CharField(source='revisor.apellidos', read_only=True)
@@ -104,6 +97,7 @@ class RecursoComentarioSerializer(serializers.ModelSerializer):
         model = Control_Comentarios
         fields = '__all__'
 
+        
 class ResultListCheqSerializer(serializers.ModelSerializer):
     nombre_recurso = serializers.CharField(source='recurso.nombre', read_only=True)
     nombre_item = serializers.CharField(source='itemChequeo.nombre', read_only=True)
@@ -113,6 +107,7 @@ class ResultListCheqSerializer(serializers.ModelSerializer):
         fields = (
         'id', 'nombre_recurso', 'nombre_item', 'resultado')
 
+        
 class RecursosAuditorSerializer(serializers.ModelSerializer):
     auditor = ResponsableSerializer(read_only=True,allow_null=True)
     tipoRecurso=TipoRecursoSerializer(read_only=True,allow_null=True)
