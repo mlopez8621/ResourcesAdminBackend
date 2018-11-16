@@ -18,6 +18,8 @@ from resourcesApp.serializer import RecursoSerializer, TipoRecursoSerializer, Re
 
 @csrf_exempt
 def recursos_list(request):
+
+
     if request.method == 'GET':
         recurso = Recurso.objects.all().order_by('id')
         serializer = RecursoSerializer(recurso, many=True)
@@ -31,6 +33,19 @@ def recursos_list(request):
             return JSONResponse(serialized.data, status=status.HTTP_201_CREATED)
         else:
             return JSONResponse(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method=='PUT':
+        try:
+            data = JSONParser().parse(request)
+            recursoExistente = Recurso.objects.get(pk=data.get('id'))
+        except Recurso.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serialized = RecursoSerializer(recursoExistente,data=data)
+        if serialized.is_valid():
+            serialized.save()
+            return JSONResponse(serialized.data, status=status.HTTP_200_OK)
+        else:
+            return JSONResponse(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class RecursoViewSet(generics.ListAPIView):

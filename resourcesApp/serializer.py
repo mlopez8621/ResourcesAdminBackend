@@ -20,12 +20,19 @@ class RecursoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recurso
-        fields = ('id', 'nombre','descripcion','tipoRecurso','idSolicitud','idProyecto','descripcionSolicitud','estado', 'nombre_estado', 'nombre_tipo')
+        fields = ('id', 'nombre','descripcion','tipoRecurso','idSolicitud','idProyecto','descripcionSolicitud','estado', 'nombre_estado', 'nombre_tipo','auditor')
 
     def create(self, validated_data):
         recurso = super(RecursoSerializer,self).create(validated_data)
         recurso.save()
         return recurso
+
+    def update(self, instance, validated_data):
+        instance.id = validated_data.get('id', instance.id)
+        instance.auditor = validated_data.get('auditor', instance.auditor)
+        print(instance)
+        instance.save()
+        return instance
 
 class ResponsableSerializer(serializers.ModelSerializer):
 
