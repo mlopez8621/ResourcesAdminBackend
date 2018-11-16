@@ -1,3 +1,7 @@
+from itertools import chain
+from operator import attrgetter
+
+from django.db.models import Q
 from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics, filters, viewsets, serializers, status
@@ -7,9 +11,9 @@ from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-from resourcesApp.models import Recurso, Tipo_Recurso, Control_Comentarios, Resultado_ListaChequeo, Recurso_Revisor
+from resourcesApp.models import Recurso, Tipo_Recurso, Control_Comentarios, Resultado_ListaChequeo
 from resourcesApp.serializer import RecursoSerializer, TipoRecursoSerializer, RecursoComentarioSerializer, \
-    ResultListCheqSerializer, RecursoRevisorSerializer, RecursosSerializer
+    ResultListCheqSerializer, RecursosAuditorSerializer
 
 
 @csrf_exempt
@@ -89,14 +93,12 @@ class resultado_ListachequeoViewSet(generics.ListAPIView):
             queryset = queryset.filter(recurso__estado__nombre__contains=estado)
         return queryset
 
-class Recurso_revisorViewSet(viewsets.ModelViewSet):
-    queryset = Recurso_Revisor.objects.all()
-    serializer_class = RecursosSerializer
+
+class RecursoAuditorViewSet(generics.ListAPIView):
+    serializer_class = RecursosAuditorSerializer
     def get_queryset(self):
         queryset = Recurso.objects.all()
-        querysetRevisor = Recurso_Revisor.objects.all()
-        estado = self.request.query_params.get('estado', None)
+        estado = self.request.query_params.get('estado',None)
         if estado:
-            queryset = queryset.filter(estado__id=estado)
-
+            queryset = queryset.filter(estado_id=estado)
         return queryset

@@ -4,17 +4,14 @@ from rest_framework import routers, serializers, viewsets
 
 
 from resourcesApp.models import Estado, Responsable, Recurso_Responsable, \
-    Tipo_Recurso, Recurso, Control_Comentarios, Resultado_ListaChequeo, Recurso_Revisor
+    Tipo_Recurso, Recurso, Control_Comentarios, Resultado_ListaChequeo
 
 
 class EstadoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Estado
         fields = ('id','nombre','descripcion')
-class RecursosSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Recurso
-        fields = '__all__'
+
 
 
 class RecursoSerializer(serializers.ModelSerializer):
@@ -30,17 +27,16 @@ class RecursoSerializer(serializers.ModelSerializer):
         recurso.save()
         return recurso
 
-class RecursoRevisorSerializer(serializers.ModelSerializer):
-    rescursos = RecursosSerializer(read_only=True)
-    class Meta:
-        model = Recurso_Revisor
-        fields = '__all__'
-
 class ResponsableSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Responsable
         fields = '__all__'
+
+
+
+
+
 
 class RecursoResponsableSerializer(serializers.ModelSerializer):
 
@@ -109,3 +105,10 @@ class ResultListCheqSerializer(serializers.ModelSerializer):
         model = Resultado_ListaChequeo
         fields = (
         'id', 'nombre_recurso', 'nombre_item', 'resultado')
+
+class RecursosAuditorSerializer(serializers.ModelSerializer):
+    auditor = ResponsableSerializer(read_only=True,allow_null=True)
+    tipoRecurso=TipoRecursoSerializer(read_only=True,allow_null=True)
+    class Meta:
+        model = Recurso
+        fields = '__all__'
