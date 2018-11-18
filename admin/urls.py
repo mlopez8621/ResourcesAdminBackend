@@ -18,6 +18,7 @@ from django.contrib import admin
 from rest_framework import routers
 
 from resourcesApp.Views.EstadoViews import EstadosViewSet
+from resourcesApp.Views.RecursoIntermedioViews import RecursoIntermedioViewSet
 from resourcesApp.Views.RecursoViews import RecursoViewSet, recursos_comentarios, resultado_ListachequeoViewSet
 from resourcesApp.Views.ResponsableViews import ResponsableViewSet
 from resourcesApp.Views.RecursoResponsableViews import RecursoResponsableViewSet
@@ -34,6 +35,7 @@ urlpatterns = [
     url('^comentarios/?', recursos_comentarios.as_view()),
     url('^responsable/', ResponsableViewSet.as_view()),
     url('^recurso-responsable/', RecursoResponsableViewSet.as_view()),
+    url('^recurso-intermedio/?', RecursoIntermedioViewSet.as_view()),
     url('^recurso-controlcalidad/', resultado_ListachequeoViewSet.as_view()),
     url(r'^', include(router.urls)),
     url(r'^', include('resourcesApp.urls'))
