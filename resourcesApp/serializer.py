@@ -101,7 +101,26 @@ class ResultListCheqSerializer(serializers.ModelSerializer):
 
 
 class RecursoIntermedioSerializer(serializers.ModelSerializer):
+    nombre_tipo_recurso = serializers.CharField(source='tipoRecurso.nombre', read_only=True)
+    nombre_responsable = serializers.CharField(source='responsable.nombres', read_only=True)
+    nombre_estado = serializers.CharField(source='estado.nombre', read_only=True)
+    nombre_recursoPrincipal =serializers.CharField(source='recursoPrincipal.nombre', read_only=True)
 
     class Meta:
         model = Recurso_Intermedio
-        fields = '__all__'
+        fields = (
+        'id',
+        'nombre',
+        'descripcion',
+        'tipoRecurso',
+        'nombre_tipo_recurso',
+        'estado',
+        'nombre_estado',
+        'responsable',
+        'nombre_responsable',
+        'recursoPrincipal',
+        'nombre_recursoPrincipal')
+
+
+
+

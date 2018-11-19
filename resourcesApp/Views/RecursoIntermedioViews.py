@@ -17,7 +17,7 @@ class RecursoIntermedioViewSet(generics.ListAPIView):
         queryset = Recurso_Intermedio.objects.all()
         idRecurso = self.request.query_params.get('idRecurso', None)
         if idRecurso:
-            queryset = queryset.filter(recursoPrincipal=idRecurso)
+            queryset = queryset.filter(recursoPrincipal=idRecurso).order_by('id')
 
         return queryset
 
