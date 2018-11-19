@@ -101,7 +101,7 @@ class resultado_ListachequeoViewSet(generics.ListAPIView):
     #queryset = Resultado_ListaChequeo.objects.all().order_by('id')
 
     def get_queryset(self):
-        queryset = Resultado_ListaChequeo.objects.all().order_by('id')
+        queryset = Resultado_ListaChequeo.objects.all().order_by('recurso__nombre')
         idRecurso = self.request.query_params.get('idRecurso',None)
         estado = 'Gesti'
         if idRecurso:
