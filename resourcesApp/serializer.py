@@ -4,7 +4,7 @@ from rest_framework import routers, serializers, viewsets
 
 
 from resourcesApp.models import Estado, Responsable, Recurso_Responsable, \
-    Tipo_Recurso, Recurso, Control_Comentarios, Resultado_ListaChequeo
+    Tipo_Recurso, Recurso, Control_Comentarios, Resultado_ListaChequeo,Recurso_Intermedio
 
 
 class EstadoSerializer(serializers.HyperlinkedModelSerializer):
@@ -107,10 +107,30 @@ class ResultListCheqSerializer(serializers.ModelSerializer):
         fields = (
         'id', 'nombre_recurso', 'nombre_item', 'resultado')
 
-        
 class RecursosAuditorSerializer(serializers.ModelSerializer):
     auditor = ResponsableSerializer(read_only=True,allow_null=True)
     tipoRecurso=TipoRecursoSerializer(read_only=True,allow_null=True)
     class Meta:
         model = Recurso
         fields = '__all__'
+
+class RecursoIntermedioSerializer(serializers.ModelSerializer):
+    nombre_tipo_recurso = serializers.CharField(source='tipoRecurso.nombre', read_only=True)
+    nombre_responsable = serializers.CharField(source='responsable.nombres', read_only=True)
+    nombre_estado = serializers.CharField(source='estado.nombre', read_only=True)
+    nombre_recursoPrincipal =serializers.CharField(source='recursoPrincipal.nombre', read_only=True)
+
+    class Meta:
+        model = Recurso_Intermedio
+        fields = (
+        'id',
+        'nombre',
+        'descripcion',
+        'tipoRecurso',
+        'nombre_tipo_recurso',
+        'estado',
+        'nombre_estado',
+        'responsable',
+        'nombre_responsable',
+        'recursoPrincipal',
+        'nombre_recursoPrincipal')
