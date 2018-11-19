@@ -20,6 +20,8 @@ from rest_framework import routers
 from resourcesApp.Views.EstadoViews import EstadosViewSet
 from resourcesApp.Views.RecursoViews import RecursoViewSet, recursos_comentarios, resultado_ListachequeoViewSet, \
     RecursoAuditorViewSet
+from resourcesApp.Views.RecursoIntermedioViews import RecursoIntermedioViewSet
+from resourcesApp.Views.RecursoViews import RecursoViewSet, recursos_comentarios, resultado_ListachequeoViewSet
 from resourcesApp.Views.ResponsableViews import ResponsableViewSet
 from resourcesApp.Views.RecursoResponsableViews import RecursoResponsableViewSet
 from resourcesApp.Views.RecursoViews import RecursoViewSet, TipoRecursoViewSet
@@ -35,6 +37,7 @@ urlpatterns = [
     url('^responsable/', ResponsableViewSet.as_view()),
     url('^recurso-responsable/', RecursoResponsableViewSet.as_view()),
     url('^comentario/?', crear_comentario),
+    url('^recurso-intermedio/?', RecursoIntermedioViewSet.as_view()),
     url('^recurso-controlcalidad/', resultado_ListachequeoViewSet.as_view()),
     url('^auditoria/', RecursoAuditorViewSet.as_view()),
     url(r'^', include(router.urls)),
