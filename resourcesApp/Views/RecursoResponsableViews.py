@@ -3,7 +3,8 @@
 from django.http.response import HttpResponse
 from rest_framework import generics,status
 from resourcesApp.models import Recurso_Responsable
-from resourcesApp.serializer import RecursoResponsableSerializer,RecursoResponsableMostarSerializer
+from resourcesApp.serializer import RecursoResponsableSerializer, RecursoResponsableMostarSerializer, \
+    ResponsablePorRecursoSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer
@@ -25,6 +26,17 @@ from rest_framework.response import Response
 #             return JSONResponse(serialized.data, status=status.HTTP_201_CREATED)
 #         else:
 #             return JSONResponse(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
+
+class RecursoResponsable(generics.ListAPIView):
+    serializer_class = ResponsablePorRecursoSerializer
+
+    def get_queryset(self):
+        queryset = Recurso_Responsable.objects.all()
+        recurso = self.request.query_params.get('recurso',None)
+        if recurso:
+            queryset = queryset.filter(rescursos_id=recurso)
+
+        return queryset
 
 
 class RecursoResponsableViewSet(generics.ListAPIView):
