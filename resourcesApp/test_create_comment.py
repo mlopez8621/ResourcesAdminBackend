@@ -1,6 +1,4 @@
 from unittest import TestCase
-
-from resourcesApp.Views.ComentarioViews import crear_comentario
 from resourcesApp.models import Control_Comentarios
 
 import datetime

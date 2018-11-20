@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from resourcesApp.Views import RecursoViews, RecursoResponsableViews, ComentarioViews
+from resourcesApp.Views import RecursoViews, RecursoResponsableViews
 
 
 urlpatterns = [

@@ -1,10 +1,6 @@
-from itertools import chain
-from operator import attrgetter
-
-from django.db.models import Q
 from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import generics, filters, viewsets, serializers, status
+from rest_framework import generics, viewsets,  status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny

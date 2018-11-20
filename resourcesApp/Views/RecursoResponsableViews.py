@@ -1,10 +1,7 @@
 
 
 from django.http.response import HttpResponse
-from rest_framework import generics, filters, viewsets, serializers, status
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
-
+from rest_framework import generics,status
 from resourcesApp.models import Recurso_Responsable
 from resourcesApp.serializer import RecursoResponsableSerializer,RecursoResponsableMostarSerializer
 from rest_framework.decorators import api_view, permission_classes

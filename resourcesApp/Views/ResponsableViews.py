@@ -1,4 +1,4 @@
-from rest_framework import generics, filters, viewsets
+from rest_framework import generics
 
 from resourcesApp.models import Responsable
 from resourcesApp.serializer import ResponsableSerializer

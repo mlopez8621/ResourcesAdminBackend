@@ -18,10 +18,9 @@ from django.contrib import admin
 from rest_framework import routers
 
 from resourcesApp.Views.EstadoViews import EstadosViewSet
-from resourcesApp.Views.RecursoViews import RecursoViewSet, recursos_comentarios, resultado_ListachequeoViewSet, \
-    RecursoAuditorViewSet
+from resourcesApp.Views.RecursoViews import RecursoAuditorViewSet
 from resourcesApp.Views.RecursoIntermedioViews import RecursoIntermedioViewSet
-from resourcesApp.Views.RecursoViews import RecursoViewSet, recursos_comentarios, resultado_ListachequeoViewSet
+from resourcesApp.Views.RecursoViews import recursos_comentarios, resultado_ListachequeoViewSet
 from resourcesApp.Views.ResponsableViews import ResponsableViewSet
 from resourcesApp.Views.RecursoResponsableViews import RecursoResponsableViewSet
 from resourcesApp.Views.RecursoViews import RecursoViewSet, TipoRecursoViewSet
