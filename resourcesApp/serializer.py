@@ -36,7 +36,12 @@ class ResponsableSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class RecursoResponsableSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recurso_Responsable
+        fields = '__all__'
 
+class ResponsablePorRecursoSerializer(serializers.ModelSerializer):
+    responsable =  ResponsableSerializer(read_only=True,allow_null=True)
     class Meta:
         model = Recurso_Responsable
         fields = '__all__'

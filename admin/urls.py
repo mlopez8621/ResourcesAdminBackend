@@ -22,7 +22,7 @@ from resourcesApp.Views.RecursoViews import RecursoAuditorViewSet
 from resourcesApp.Views.RecursoIntermedioViews import RecursoIntermedioViewSet
 from resourcesApp.Views.RecursoViews import recursos_comentarios, resultado_ListachequeoViewSet
 from resourcesApp.Views.ResponsableViews import ResponsableViewSet
-from resourcesApp.Views.RecursoResponsableViews import RecursoResponsableViewSet
+from resourcesApp.Views.RecursoResponsableViews import RecursoResponsableViewSet, RecursoResponsable
 from resourcesApp.Views.RecursoViews import RecursoViewSet, TipoRecursoViewSet
 from resourcesApp.Views.ComentarioViews import crear_comentario
 router = routers.DefaultRouter()
@@ -32,6 +32,7 @@ urlpatterns = router.urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('^recursos/?', RecursoViewSet.as_view()),
+    url('^responsable-recurso/?', RecursoResponsable.as_view()),
     url('^comentarios/?', recursos_comentarios.as_view()),
     url('^responsable/', ResponsableViewSet.as_view()),
     url('^recurso-responsable/', RecursoResponsableViewSet.as_view()),
