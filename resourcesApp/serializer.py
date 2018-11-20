@@ -2,7 +2,7 @@ from rest_framework import  serializers
 
 
 from resourcesApp.models import Estado, Responsable, Recurso_Responsable, \
-    Tipo_Recurso, Recurso, Control_Comentarios, Resultado_ListaChequeo
+    Tipo_Recurso, Recurso, Control_Comentarios, Resultado_ListaChequeo,Recurso_Intermedio
 
 
 class EstadoSerializer(serializers.HyperlinkedModelSerializer):
@@ -10,8 +10,7 @@ class EstadoSerializer(serializers.HyperlinkedModelSerializer):
         model = Estado
         fields = ('id','nombre','descripcion')
 
-
-
+        
 class RecursoSerializer(serializers.ModelSerializer):
     nombre_estado = serializers.CharField(source='estado.nombre', read_only=True)
     nombre_tipo = serializers.CharField(source='tipoRecurso.nombre', read_only=True)
@@ -31,17 +30,11 @@ class RecursoSerializer(serializers.ModelSerializer):
         print(instance)
         instance.save()
         return instance
-
 class ResponsableSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Responsable
         fields = '__all__'
-
-
-
-
-
 
 class RecursoResponsableSerializer(serializers.ModelSerializer):
 
@@ -76,9 +69,7 @@ class RecursoResponsableMostarSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-
-
-
+      
 class TipoRecursoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         ordering = ['id']
@@ -94,6 +85,8 @@ class RecursoCreate(serializers.ModelSerializer):
         recurso = super(RecursoSerializer,self).create(validated_data)
         recurso.save()
         return recurso
+
+      
 class RecursoComentarioSerializer(serializers.ModelSerializer):
     nombre_responsable = serializers.CharField(source='revisor.nombres', read_only=True)
     apellidos_responsable = serializers.CharField(source='revisor.apellidos', read_only=True)
@@ -102,6 +95,7 @@ class RecursoComentarioSerializer(serializers.ModelSerializer):
         model = Control_Comentarios
         fields = '__all__'
 
+        
 class ResultListCheqSerializer(serializers.ModelSerializer):
     nombre_recurso = serializers.CharField(source='recurso.nombre', read_only=True)
     nombre_item = serializers.CharField(source='itemChequeo.nombre', read_only=True)
@@ -117,3 +111,24 @@ class RecursosAuditorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recurso
         fields = '__all__'
+
+class RecursoIntermedioSerializer(serializers.ModelSerializer):
+    nombre_tipo_recurso = serializers.CharField(source='tipoRecurso.nombre', read_only=True)
+    nombre_responsable = serializers.CharField(source='responsable.nombres', read_only=True)
+    nombre_estado = serializers.CharField(source='estado.nombre', read_only=True)
+    nombre_recursoPrincipal =serializers.CharField(source='recursoPrincipal.nombre', read_only=True)
+
+    class Meta:
+        model = Recurso_Intermedio
+        fields = (
+        'id',
+        'nombre',
+        'descripcion',
+        'tipoRecurso',
+        'nombre_tipo_recurso',
+        'estado',
+        'nombre_estado',
+        'responsable',
+        'nombre_responsable',
+        'recursoPrincipal',
+        'nombre_recursoPrincipal')

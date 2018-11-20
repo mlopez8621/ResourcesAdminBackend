@@ -94,8 +94,10 @@ class recursos_comentarios(generics.ListAPIView):
 
 class resultado_ListachequeoViewSet(generics.ListAPIView):
     serializer_class = ResultListCheqSerializer
+    #queryset = Resultado_ListaChequeo.objects.all().order_by('id')
+
     def get_queryset(self):
-        queryset = Resultado_ListaChequeo.objects.all()
+        queryset = Resultado_ListaChequeo.objects.all().order_by('recurso__nombre')
         idRecurso = self.request.query_params.get('idRecurso',None)
         estado = 'Gesti'
         if idRecurso:
@@ -104,6 +106,32 @@ class resultado_ListachequeoViewSet(generics.ListAPIView):
             queryset = queryset.filter(recurso__estado__nombre__contains=estado)
         return queryset
 
+@api_view(['GET', 'PUT'])
+@permission_classes((AllowAny,))
+def recursoListaChequeo_list(request, pk):
+    """
+    Retrieve, update or delete a snippet instance.
+    """
+    try:
+        estado = 'Gesti'
+        #recursoListaChequeo = Resultado_ListaChequeo.objects.get(pk=pk).objects.filter(recurso__estado__nombre__contains=estado)
+    except Resultado_ListaChequeo.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    #if request.method == 'GET':
+    #    serializer = ResultListCheqSerializer(recursoListaChequeo)
+    #    return Response(serializer.data)
+
+    if request.method == 'PUT':
+        recursoListaChequeo= Resultado_ListaChequeo.objects.get(pk = pk)
+        print("Entro al put")
+        serializer = ResultListCheqSerializer(recursoListaChequeo, data=request.data)
+        if serializer.is_valid():
+            print("------Serializer-----")
+            print(serializer)
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class RecursoAuditorViewSet(generics.ListAPIView):
     serializer_class = RecursosAuditorSerializer
@@ -113,3 +141,4 @@ class RecursoAuditorViewSet(generics.ListAPIView):
         if estado:
             queryset = queryset.filter(estado_id=estado)
         return queryset
+
