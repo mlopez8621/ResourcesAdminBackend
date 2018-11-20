@@ -1,14 +1,12 @@
 from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import generics, filters, viewsets, serializers, status
+from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-from resourcesApp.models import Recurso, Tipo_Recurso, Control_Comentarios
-from resourcesApp.serializer import RecursoSerializer, TipoRecursoSerializer, RecursoComentarioSerializer
+from resourcesApp.serializer import RecursoComentarioSerializer
 
 
 @csrf_exempt
