@@ -36,7 +36,6 @@ class ResponsableSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class RecursoResponsableSerializer(serializers.ModelSerializer):
-    responsable =  serializers.CharField(source='responsable.id', read_only=True)
     class Meta:
         model = Recurso_Responsable
         fields = '__all__'
