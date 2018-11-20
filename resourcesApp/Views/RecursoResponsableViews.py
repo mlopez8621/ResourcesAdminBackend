@@ -2,7 +2,6 @@
 
 from django.http.response import HttpResponse
 from rest_framework import generics,status
-
 from resourcesApp.models import Recurso_Responsable
 from resourcesApp.serializer import RecursoResponsableSerializer,RecursoResponsableMostarSerializer
 from rest_framework.decorators import api_view, permission_classes
