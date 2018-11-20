@@ -22,7 +22,7 @@ from resourcesApp.Views.RecursoViews import RecursoViewSet, recursos_comentarios
     RecursoAuditorViewSet
 from resourcesApp.Views.ResponsableViews import ResponsableViewSet
 from resourcesApp.Views.RecursoResponsableViews import RecursoResponsableViewSet
-from resourcesApp.Views.RecursoViews import RecursoViewSet, TipoRecursoViewSet
+from resourcesApp.Views.RecursoViews import TipoRecursoViewSet
 
 
 router = routers.DefaultRouter()

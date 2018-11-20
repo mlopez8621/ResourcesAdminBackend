@@ -2,8 +2,6 @@ from datetime import datetime
 
 from django.db.models import ForeignKey
 
-from django.shortcuts import render
-
 # Create your views here.
 from django.db import models
 

@@ -1,6 +1,4 @@
-import serializers as serializers
-
-from rest_framework import routers, serializers, viewsets
+from rest_framework import  serializers
 
 
 from resourcesApp.models import Estado, Responsable, Recurso_Responsable, \
