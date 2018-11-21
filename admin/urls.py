@@ -18,12 +18,13 @@ from django.contrib import admin
 from rest_framework import routers
 
 from resourcesApp.Views.EstadoViews import EstadosViewSet
-from resourcesApp.Views.RecursoViews import RecursoViewSet, recursos_comentarios
+from resourcesApp.Views.RecursoViews import RecursoAuditorViewSet
+from resourcesApp.Views.RecursoIntermedioViews import RecursoIntermedioViewSet
+from resourcesApp.Views.RecursoViews import recursos_comentarios, resultado_ListachequeoViewSet
 from resourcesApp.Views.ResponsableViews import ResponsableViewSet
-from resourcesApp.Views.RecursoResponsableViews import RecursoResponsableViewSet
+from resourcesApp.Views.RecursoResponsableViews import RecursoResponsableViewSet, RecursoResponsable
 from resourcesApp.Views.RecursoViews import RecursoViewSet, TipoRecursoViewSet
-
-
+from resourcesApp.Views.ComentarioViews import crear_comentario
 router = routers.DefaultRouter()
 router.register(r'estados', EstadosViewSet)
 router.register(r'tipo-recursos', TipoRecursoViewSet)
@@ -31,9 +32,14 @@ urlpatterns = router.urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('^recursos/?', RecursoViewSet.as_view()),
+    url('^responsable-recurso/?', RecursoResponsable.as_view()),
     url('^comentarios/?', recursos_comentarios.as_view()),
     url('^responsable/', ResponsableViewSet.as_view()),
     url('^recurso-responsable/', RecursoResponsableViewSet.as_view()),
+    url('^comentario/?', crear_comentario),
+    url('^recurso-intermedio/?', RecursoIntermedioViewSet.as_view()),
+    url('^recurso-controlcalidad/', resultado_ListachequeoViewSet.as_view()),
+    url('^auditoria/', RecursoAuditorViewSet.as_view()),
     url(r'^', include(router.urls)),
     url(r'^', include('resourcesApp.urls'))
 ]
