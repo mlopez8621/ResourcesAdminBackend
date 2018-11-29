@@ -29,7 +29,7 @@ class Responsable(models.Model):
     nombres = models.CharField(max_length=50, null=False)
     apellidos = models.CharField(max_length=50, null=False)
     usuario = models.CharField(max_length=50, null=False)
-    rol = ForeignKey(Rol)
+    rol = ForeignKey(Rol, on_delete=models.CASCADE)git
 
     def __str__(self):
         return '%d: %s' % (self.id, self.nombres)
