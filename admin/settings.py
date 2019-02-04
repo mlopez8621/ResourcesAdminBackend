@@ -74,22 +74,22 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 
 DATABASES = {
 
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'resources',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'password',
-    #     'HOST': 'localhost',
-    #     'PORT': '5432'
-    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbmn358ov5l66j',
-        'USER': 'uidjvxuhavcnxe',
-        'PASSWORD': 'e0259f4d55a91b10d88fe3d8fd386bea97f1a5ebd1647a5f26eb609b37f85a6f',
-        'HOST': 'ec2-54-204-14-96.compute-1.amazonaws.com',
+        'NAME': 'polls',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
         'PORT': '5432'
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'dbmn358ov5l66j',
+    #     'USER': 'uidjvxuhavcnxe',
+    #     'PASSWORD': 'e0259f4d55a91b10d88fe3d8fd386bea97f1a5ebd1647a5f26eb609b37f85a6f',
+    #     'HOST': 'ec2-54-204-14-96.compute-1.amazonaws.com',
+    #     'PORT': '5432'
+    # }
 
 }
 
